@@ -1,6 +1,6 @@
 [<img src="https://mholt.github.io/json-to-go/resources/images/json-to-go.png" alt="JSON-to-Go JSON转化为Go结构体"></a>](https://mholt.github.io/json-to-go)
 
-将JSON转化为Go结构体。 [试试看！](http://mholt.github.io/json-to-go)
+将JSON转化为Go结构体。 [英文版JSON-to-Go](http://mholt.github.io/json-to-go)  [中文版JSON-to-Go](http://json-to-go.hmldd.com)
 
 这是 [curl-to-Go](https://mholt.github.io/curl-to-go) 的兄弟工具，curl-to-go可以将curl命令转化为go代码。 
 
