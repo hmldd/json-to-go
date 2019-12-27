@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON-to-Go：JSON实时转化为Go结构体</title>
+    <meta charset="UTF-8">
+    <script src="resources/js/jquery.min.js"></script>
+    <script src="resources/js/highlight.min.js"></script>
+    <script src="resources/js/json-to-go.js"></script>
+    <script src="resources/js/common.js"></script>
+    <script src="resources/js/gofmt.js" async></script>
+    <link rel="stylesheet" href="resources/css/tomorrow.highlight.css">
+    <link rel="stylesheet" href="resources/css/common.css">
+    <link rel='stylesheet' href='resources/css/dark.css' id='dark-css'>
+</head>
+<body>
+<header>
+    <div class="intro">
+        <div class="title">
+            <h1>JSON-to-Go</h1>
+            <h2>JSON转化为Go结构体</h2>
+        </div>
+        <div>
+            <p>
+                JSON-to-Go工具可以实时将JSON转化为Go结构体。左边粘贴JSON格式的字符串右边自动生成可直接在项目中使用的Go结构体。JSON-to-Go工具有时需要做一些假设，请再检查一遍输出结果！
+            </p>
+            <p>
+                试试转化JSON <a href="javascript:" id="sample1">SmartyStreets API</a> 或 <a href="javascript:" id="sample2">GitHub API</a> 吧。
+            </p>
+            <p>
+                &copy; 2015 <a href="https://matt.life">Matt Holt</a> (<a href="https://twitter.com/mholt6">@mholt6</a>)
+                &bull; <a href="https://github.com/mholt/json-to-go">查看GitHub</a>
+                &bull; <a href="javascript:" id="dark">浅色主题</a>
+                <br>
+                &copy; 2019 <a href="https://github.com/hmldd">hmldd</a> 翻译
+                &bull; <a href="https://github.com/hmldd/json-to-go">中文GitHub</a>
+            </p>
+        </div>
+        <div>
+            <img src="resources/images/json-to-go.png" id="brand">
+        </div>
+    </div>
+</header>
+<table>
+    <tr>
+        <th style="width: 45%;">JSON</th>
+        <th style="width: 10%; font-size: 22px;">&#8594;</th>
+        <th style="width: 45%;">Go <label><input type="checkbox" id="inline" checked>行内类型定义</label> <span class="copy" id="copy-btn">复制到剪切板</span></th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td style="width: 50%;">
+            <div id="input" contenteditable></div>
+        </td>
+        <td style="width: 50%;">
+            <div id="output"></div>
+        </td>
+    </tr>
+</table>
+
+<footer>
+    &copy; 2015 Matt Holt
+    <br>
+    Gopher卡通形象基于Renee French的设计改编而成
+</footer>
+</body>
+</html>

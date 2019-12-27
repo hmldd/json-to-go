@@ -1,10 +1,11 @@
 /*
 	JSON-to-Go
-	by Matt Holt
+	作者：Matt Holt
+	翻译：hmldd
 
-	https://github.com/mholt/json-to-go
+	https://github.com/hmldd/json-to-go
 
-	A simple utility to translate JSON into a Go type definition.
+	一个将JSON转化为Go结构体的工具。
 */
 
 function jsonToGo(json, typename, flatten = true)
@@ -22,7 +23,7 @@ function jsonToGo(json, typename, flatten = true)
 
 	try
 	{
-		data = JSON.parse(json.replace(/:(\s*\d*)\.0/g, ":$1.1")); // hack that forces floats to stay as floats
+		data = JSON.parse(json.replace(/:(\s*\d*)\.0/g, ":$1.1")); // 强制保持浮点类型的数据为浮点类型的黑科技
 		scope = data;
 	}
 	catch (e)
@@ -78,7 +79,7 @@ function jsonToGo(json, typename, flatten = true)
 				if (sliceType == "struct") {
 					const allFields = {};
 
-					// for each field counts how many times appears
+					// 计算每个字段出现的次数
 					for (let i = 0; i < scopeLength; i++)
 					{
 						const keys = Object.keys(scope[i])
@@ -113,8 +114,8 @@ function jsonToGo(json, typename, flatten = true)
 						}
 					}
 
-					// create a common struct with all fields found in the current array
-					// omitempty dict indicates if a field is optional
+					// 创建一个包含当前数组所有字段的通用结构体
+					// 简单粗暴的标识一个字段是否可选
 					const keys = Object.keys(allFields), struct = {}, omitempty = {};
 					for (let k in keys)
 					{
@@ -123,7 +124,7 @@ function jsonToGo(json, typename, flatten = true)
 						struct[keyname] = elem.value;
 						omitempty[keyname] = elem.count != scopeLength;
 					}
-					parseStruct(depth + 1, innerTabs, struct, omitempty); // finally parse the struct !!
+					parseStruct(depth + 1, innerTabs, struct, omitempty); // 最后解析结构体！！
 				}
 				else if (sliceType == "slice") {
 					parseScope(scope[0], depth)
@@ -174,9 +175,8 @@ function jsonToGo(json, typename, flatten = true)
 			const parentType = `type ${parent}`;
 			const scopeKeys = formatScopeKeys(Object.keys(scope));
 
-			// this can only handle two duplicate items
-			// future improvement will handle the case where there could
-			// three or more duplicate keys with different values
+			// 这里只能处理两个重复的item
+			// 进一步的改进将可以处理三个或多个键名相同键值不同的情况
 			if (parent in seen && compareObjectKeys(scopeKeys, seen[parent])) {
 				stack.pop();
 				return
@@ -253,7 +253,7 @@ function jsonToGo(json, typename, flatten = true)
 		stack[stack.length - 1] += str;
 	}
 
-	// Sanitizes and formats a string to make an appropriate identifier in Go
+	// 清理、格式化字符串，生成一个适合Go的识别码
 	function format(str)
 	{
 		if (!str)
@@ -270,7 +270,7 @@ function jsonToGo(json, typename, flatten = true)
 		return toProperCase(str).replace(/[^a-z0-9]/ig, "") || "NAMING_FAILED";
 	}
 
-	// Determines the most appropriate Go type
+	// 选择最合适的Go类型
 	function goType(val)
 	{
 		if (val === null)
@@ -304,7 +304,7 @@ function jsonToGo(json, typename, flatten = true)
 		}
 	}
 
-	// Given two types, returns the more specific of the two
+	// 提供两种类型，返回最合适的一种
 	function mostSpecificPossibleGoType(typ1, typ2)
 	{
 		if (typ1.substr(0, 5) == "float"
@@ -317,7 +317,7 @@ function jsonToGo(json, typename, flatten = true)
 			return "interface{}";
 	}
 
-	// Proper cases a string according to Go conventions
+	// 根据Go惯例将符合约定的字符串转为大写
 	function toProperCase(str)
 	{
 		// https://github.com/golang/lint/blob/5614ed5bae6fb75893070bdc0996a68765fdd275/lint.go#L771-L810
@@ -373,7 +373,7 @@ function jsonToGo(json, typename, flatten = true)
 		const lengthA = itemAKeys.length;
 		const lengthB = itemBKeys.length;
 
-		// nothing to compare, probably identical
+		// 可能是相同的，不需要比较
 		if (lengthA == 0 && lengthB == 0)
 			return true;
 
